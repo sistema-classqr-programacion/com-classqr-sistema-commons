@@ -1,40 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
+
 	<groupId>com.classqr.sistema</groupId>
 	<artifactId>commons</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>commons</name>
-	<description>Proyecto commons para el sitema</description>
-	<url/>
+	<description>Proyecto commons para el sistema</description>
+
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/sistema-classqr-programacion/com-classqr-sistema-commons</url>
+		</repository>
+		<snapshotRepository>
+			<id>github</id>
+			<name>GitHub Packages Snapshots</name>
+			<url>https://maven.pkg.github.com/sistema-classqr-programacion/com-classqr-sistema-commons</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<licenses>
-		<license/>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
 	</licenses>
+
 	<developers>
-		<developer/>
+		<developer>
+			<id>MariaFernanda1818</id>
+			<name>Maria Fernanda Valencia Noreña</name>
+			<email>mariafvn0127@gmail.com</email>
+		</developer>
 	</developers>
+
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection>scm:git:git://github.com/sistema-classqr-programacion/com-classqr-sistema-commons.git</connection>
+		<developerConnection>scm:git:ssh://github.com/sistema-classqr-programacion/com-classqr-sistema-commons.git</developerConnection>
+		<url>https://github.com/sistema-classqr-programacion/com-classqr-sistema-commons</url>
+		<tag>HEAD</tag>
 	</scm>
+
 	<properties>
 		<java.version>17</java.version>
 		<org.mapstruct.version>1.6.0</org.mapstruct.version>
+		<lombok.version>1.18.32</lombok.version>
+		<jackson.version>2.18.0-rc1</jackson.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.18.0-rc1</version>
+			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -53,6 +83,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -77,6 +108,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<!-- Plugin para generar el archivo JAR con la documentación de Java (JavaDoc) -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -90,6 +122,8 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Plugin de compilación -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -100,24 +134,27 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.18.32</version>
+							<version>${lombok.version}</version>
 						</path>
 						<path>
 							<groupId>org.mapstruct</groupId>
 							<artifactId>mapstruct-processor</artifactId>
 							<version>${org.mapstruct.version}</version>
 						</path>
-
-						<!-- other annotation processors -->
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+
+			<!-- Plugin para desplegar en GitHub Packages -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.8.2</version>
+				<configuration>
+					<repositoryId>github</repositoryId>
+					<url>https://maven.pkg.github.com/sistema-classqr-programacion/com-classqr-sistema-commons</url>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
