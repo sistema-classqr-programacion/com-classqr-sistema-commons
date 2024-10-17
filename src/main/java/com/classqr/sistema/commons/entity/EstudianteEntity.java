@@ -22,7 +22,7 @@ public class EstudianteEntity {
     @Column(name = "numero_documento", nullable = false, length = 50)
     private String numeroDocumento;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_tipo_documento_fk", nullable = false)
     private TipoDocumentoEntity idTipoDocumentoEntityFk;
 
