@@ -16,22 +16,22 @@ public class AsistenciaEntity {
     @Column(name = "codigo_asistencia", nullable = false)
     private String codigoAsistencia;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "codigo_estudiante_fk", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "codigo_estudiante_fk")
     private EstudianteEntity codigoEstudianteEntityFk;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "codigo_profesor_fk", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "codigo_profesor_fk")
     private ProfesorEntity codigoProfesorEntityFk;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "codigo_curso_fk", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "codigo_curso_fk")
     private CursoEntity codigoCursoEntityFk;
 
-    @Column(name = "ip_estudiante", nullable = false)
+    @Column(name = "ip_estudiante")
     private InetAddress ipEstudiante;
 
-    @Column(name = "fecha_asistencia", nullable = false)
+    @Column(name = "fecha_asistencia")
     private LocalDate fechaAsistencia;
 
 }
