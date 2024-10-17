@@ -13,6 +13,6 @@ public class ProfesorDTO {
 
     private String numeroDocumento;
 
-    private TipoDocumentoDTO idTipoDocumentoFk;
+    private TipoDocumentoDTO idTipoDocumentoEntityFk;
 
 }
