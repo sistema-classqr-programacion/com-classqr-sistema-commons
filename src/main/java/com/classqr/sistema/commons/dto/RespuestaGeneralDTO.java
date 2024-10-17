@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class RespuestaGeneralDTO implements Serializable {
 
-    private String status;
+    private HttpStatus status;
 
     private Object data;
 
