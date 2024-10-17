@@ -19,12 +19,12 @@ public class EstudianteSeguridadDTO extends EstudianteDTO implements UserDetails
                 estudianteDTO.getNombresEstudiante(),
                 estudianteDTO.getApellidosEstudiante(),
                 estudianteDTO.getNumeroDocumento(),
-                estudianteDTO.getIdTipoDocumentoFk());
+                estudianteDTO.getIdTipoDocumentoEntityFk());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(super.getIdTipoDocumentoFk().getNombreTipoDocumento().getDescripcion()));
+        return List.of(new SimpleGrantedAuthority(super.getIdTipoDocumentoEntityFk().getNombreTipoDocumento().getDescripcion()));
     }
 
     @Override
