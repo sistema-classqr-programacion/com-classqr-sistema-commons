@@ -18,15 +18,15 @@ public class AsistenciaEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codigo_estudiante_fk")
-    private EstudianteEntity codigoEstudianteEntityFk;
+    private EstudianteEntity codigoEstudianteFk;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codigo_profesor_fk")
-    private ProfesorEntity codigoProfesorEntityFk;
+    private ProfesorEntity codigoProfesorFk;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codigo_curso_fk")
-    private CursoEntity codigoCursoEntityFk;
+    private CursoEntity codigoCursoFk;
 
     @Column(name = "ip_estudiante")
     private InetAddress ipEstudiante;
