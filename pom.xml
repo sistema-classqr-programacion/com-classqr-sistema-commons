@@ -13,7 +13,7 @@
 
 	<groupId>com.classqr.sistema</groupId>
 	<artifactId>commons</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>commons</name>
 	<description>Proyecto commons para el sistema</description>
 
