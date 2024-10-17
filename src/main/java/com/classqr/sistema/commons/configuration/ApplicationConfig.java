@@ -49,7 +49,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailService() {
         return username -> {
-            EstudianteEntity usuario = estudianteRepository.findByNumeroDocumento(username).orElseThrow(() -> new UsernameNotFoundException("Email not found"));
+            EstudianteEntity usuario = estudianteRepository.findByCodigoEstudiante(username).orElseThrow(() -> new UsernameNotFoundException("Email not found"));
             return new EstudianteSeguridadDTO(estudianteMapper.entityToDto(usuario));
         };
     }
