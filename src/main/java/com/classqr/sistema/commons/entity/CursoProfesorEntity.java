@@ -10,7 +10,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "curso_profesor", schema = "classqr")
 public class CursoProfesorEntity {
-    @SequenceGenerator(name = "curso_profesor_id_gen", sequenceName = "curso_codigo_curso_seq", allocationSize = 1)
     @EmbeddedId
     private CursoProfesorIdEntiy id;
 

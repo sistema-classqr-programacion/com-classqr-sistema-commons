@@ -13,8 +13,6 @@ import java.time.LocalDate;
 @Table(name = "asistencia", schema = "classqr")
 public class AsistenciaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "asistencia_id_gen")
-    @SequenceGenerator(name = "asistencia_id_gen", sequenceName = "asistencia_codigo_asistencia_seq", allocationSize = 1)
     @Column(name = "codigo_asistencia", nullable = false)
     private String codigoAsistencia;
 

@@ -10,8 +10,6 @@ import lombok.Setter;
 @Table(name = "profesor", schema = "classqr")
 public class ProfesorEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profesor_id_gen")
-    @SequenceGenerator(name = "profesor_id_gen", sequenceName = "profesor_codigo_profesor_seq", allocationSize = 1)
     @Column(name = "codigo_profesor", nullable = false)
     private String codigoProfesor;
 

@@ -12,8 +12,6 @@ import java.time.LocalTime;
 @Table(name = "curso", schema = "classqr")
 public class CursoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "curso_id_gen")
-    @SequenceGenerator(name = "curso_id_gen", sequenceName = "curso_codigo_curso_seq", allocationSize = 1)
     @Column(name = "codigo_curso", nullable = false)
     private String codigoCurso;
 
