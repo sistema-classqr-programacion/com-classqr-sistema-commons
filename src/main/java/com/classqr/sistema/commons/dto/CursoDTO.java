@@ -8,7 +8,7 @@ import java.time.LocalTime;
 @Data
 public class CursoDTO {
 
-    private Integer id;
+    private String codigoCurso;
 
     private String nombreCurso;
 

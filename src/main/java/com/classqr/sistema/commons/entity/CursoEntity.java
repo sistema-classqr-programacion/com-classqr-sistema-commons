@@ -15,7 +15,7 @@ public class CursoEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "curso_id_gen")
     @SequenceGenerator(name = "curso_id_gen", sequenceName = "curso_codigo_curso_seq", allocationSize = 1)
     @Column(name = "codigo_curso", nullable = false)
-    private Integer id;
+    private String codigoCurso;
 
     @Column(name = "nombre_curso", nullable = false, length = 100)
     private String nombreCurso;

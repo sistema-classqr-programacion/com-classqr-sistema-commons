@@ -16,7 +16,7 @@ public class AsistenciaEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "asistencia_id_gen")
     @SequenceGenerator(name = "asistencia_id_gen", sequenceName = "asistencia_codigo_asistencia_seq", allocationSize = 1)
     @Column(name = "codigo_asistencia", nullable = false)
-    private Integer id;
+    private String codigoAsistencia;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "codigo_estudiante_fk", nullable = false)

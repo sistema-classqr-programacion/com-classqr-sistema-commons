@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ProfesorDTO {
 
-    private Integer id;
+    private String codigoProfesor;
 
     private String nombresProfesor;
 

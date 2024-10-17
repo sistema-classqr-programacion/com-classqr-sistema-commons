@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class CursoProfesorIdDTO {
 
-    private Integer codigoCursoFk;
+    private String codigoCursoFk;
 
-    private Integer codigoProfesorFk;
+    private String codigoProfesorFk;
 
 }

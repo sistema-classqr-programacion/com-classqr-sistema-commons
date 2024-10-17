@@ -14,10 +14,10 @@ import java.util.Objects;
 public class CursoProfesorIdEntiy implements java.io.Serializable {
     private static final long serialVersionUID = -6730613326699073487L;
     @Column(name = "codigo_curso_fk", nullable = false)
-    private Integer codigoCursoFk;
+    private String codigoCursoFk;
 
     @Column(name = "codigo_profesor_fk", nullable = false)
-    private Integer codigoProfesorFk;
+    private String codigoProfesorFk;
 
     @Override
     public boolean equals(Object o) {

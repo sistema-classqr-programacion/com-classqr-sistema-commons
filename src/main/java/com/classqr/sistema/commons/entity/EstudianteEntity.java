@@ -13,7 +13,7 @@ public class EstudianteEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estudiante_id_gen")
     @SequenceGenerator(name = "estudiante_id_gen", sequenceName = "estudiante_codigo_estudiante_seq", allocationSize = 1)
     @Column(name = "codigo_estudiante", nullable = false)
-    private Integer id;
+    private String codigoEstudiante;
 
     @Column(name = "nombres_estudiante", nullable = false, length = 100)
     private String nombresEstudiante;

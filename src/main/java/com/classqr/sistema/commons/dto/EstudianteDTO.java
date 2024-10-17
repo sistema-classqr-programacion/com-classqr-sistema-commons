@@ -1,11 +1,14 @@
 package com.classqr.sistema.commons.dto;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class EstudianteDTO {
 
-    private Integer id;
+    private String codigoEstudiante;
 
     private String nombresEstudiante;
 

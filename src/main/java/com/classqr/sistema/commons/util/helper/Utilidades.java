@@ -1,6 +1,7 @@
 package com.classqr.sistema.commons.util.helper;
 
 
+import com.classqr.sistema.commons.util.enums.CodigoUsuarioEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -11,6 +12,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 
 public class Utilidades {
 
@@ -36,6 +38,10 @@ public class Utilidades {
 
     public static LocalDateTime convertToLocalDateTime(Date date) {
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
+
+    public static String generarCodigo(CodigoUsuarioEnum codigoEnum){
+        return codigoEnum.getDescripcion() + (1000 + new Random().nextInt(9000));
     }
 
     public static <T> T convertJsonToDto(File jsonFile, Class<T> dtoClass) throws IOException {
