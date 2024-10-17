@@ -18,6 +18,7 @@ public class TipoDocumentoEntity {
 
 
     @Column(name = "nombre_tipo_documento", columnDefinition = "tipo_documento_enum not null")
+    @Enumerated(EnumType.STRING) // Almacenar el valor como una cadena de texto en la base de datos
     private TipoDocumentoEnum nombreTipoDocumento;
 
 }
