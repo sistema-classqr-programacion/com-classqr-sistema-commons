@@ -29,12 +29,12 @@ public class EstudianteSeguridadDTO extends EstudianteDTO implements UserDetails
 
     @Override
     public String getPassword() {
-        return super.getCodigoEstudiante();
+        return super.getNumeroDocumento();
     }
 
     @Override
     public String getUsername() {
-        return super.getNumeroDocumento();
+        return super.getCodigoEstudiante();
     }
 
     @Override
