@@ -35,7 +35,7 @@ public class SpringSecurityConfig {
             auth
                     .requestMatchers("/v3/api-docs/**",
                             "/doc/**",
-                            "/qr/**",
+                            "/profesor/**",
                             "/estudiante/**"
                     ).permitAll()
                     .anyRequest().authenticated()
