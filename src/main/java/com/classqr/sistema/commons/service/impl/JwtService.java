@@ -1,9 +1,6 @@
 package com.classqr.sistema.commons.service.impl;
 
-import com.classqr.sistema.commons.dto.AsistenciaSeguridadDTO;
-import com.classqr.sistema.commons.dto.AuthResponseDTO;
-import com.classqr.sistema.commons.dto.EstudianteDTO;
-import com.classqr.sistema.commons.dto.EstudianteSeguridadDTO;
+import com.classqr.sistema.commons.dto.*;
 import com.classqr.sistema.commons.service.IJwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -41,6 +38,9 @@ public class JwtService implements IJwtService {
         } else if (userDetails instanceof AsistenciaSeguridadDTO asistenciaSeguridadDTO) {
             additionalClaims.put("codigoAsistencia", asistenciaSeguridadDTO.getCodigoAsistencia());
             additionalClaims.put("fechaAsistencia", asistenciaSeguridadDTO.getFechaAsistencia());
+        } else if (userDetails instanceof ProfesorSeguridadDTO profesorSeguridadDTO){
+            additionalClaims.put("codigoProfesor", profesorSeguridadDTO.getCodigoProfesor());
+            additionalClaims.put("nombreCompleto", profesorSeguridadDTO.getNombresProfesor());
         }
 
         return buildToken(additionalClaims, userDetails);
@@ -83,8 +83,9 @@ public class JwtService implements IJwtService {
             return claims.get("codigoEstudiante", String.class);
         } else if (claims.containsKey("codigoAsistencia")) {
             return claims.get("codigoAsistencia", String.class);
+        } else if (claims.containsKey("codigoProfesor")){
+            return claims.get("codigoProfesor", String.class);
         }
-
         // Manejo de error en caso de que no haya un identificador válido en el token
         throw new IllegalArgumentException("Token no contiene un identificador válido.");
     }

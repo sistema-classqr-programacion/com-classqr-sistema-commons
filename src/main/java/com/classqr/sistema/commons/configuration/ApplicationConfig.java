@@ -1,12 +1,17 @@
 package com.classqr.sistema.commons.configuration;
 
 import com.classqr.sistema.commons.dto.EstudianteSeguridadDTO;
+import com.classqr.sistema.commons.dto.ProfesorSeguridadDTO;
 import com.classqr.sistema.commons.entity.EstudianteEntity;
+import com.classqr.sistema.commons.entity.ProfesorEntity;
 import com.classqr.sistema.commons.repository.EstudianteRepository;
+import com.classqr.sistema.commons.repository.ProfesorRepository;
 import com.classqr.sistema.commons.util.mapper.EstudianteMapper;
+import com.classqr.sistema.commons.util.mapper.ProfesorMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -25,6 +30,10 @@ public class ApplicationConfig {
     private final EstudianteRepository estudianteRepository;
 
     private final EstudianteMapper estudianteMapper;
+
+    private final ProfesorMapper profesorMapper;
+
+    private final ProfesorRepository profesorRepository;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -49,21 +58,43 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailService() {
         return username -> {
-            EstudianteEntity usuario = estudianteRepository.findByCodigoEstudiante(username).orElseThrow(() -> new UsernameNotFoundException("Email not found"));
-            return new EstudianteSeguridadDTO(estudianteMapper.entityToDto(usuario));
+            // Primero intenta encontrar un estudiante
+            EstudianteEntity estudiante = estudianteRepository.findByCodigoEstudiante(username).orElse(null);
+            if (estudiante != null) {
+                return new EstudianteSeguridadDTO(estudianteMapper.entityToDto(estudiante));
+            }
+
+            ProfesorEntity profesor = profesorRepository.findByNumeroDocumento(username).orElseThrow(
+                    () -> new UsernameNotFoundException("Profesor no encontrado"));
+            return new ProfesorSeguridadDTO(profesorMapper.entityToDto(profesor));
         };
     }
 
+
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
+    @Profile("dev")
+    public WebMvcConfigurer corsConfigurerDev() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")  // Aplica a todas las rutas
-                        .allowedOrigins("http://localhost:4200")  // Solo permite este origen
+                        .allowedOrigins("http://localhost:4200")  // Permitir solo el origen de desarrollo
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);  // Permite el uso de credenciales si es necesario
+                        .allowedHeaders("*");  // Permitir todos los headers en desarrollo
+            }
+        };
+    }
+
+    @Bean
+    @Profile("prod")
+    public WebMvcConfigurer corsConfigurerProd() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/api/**")  // Limitar a rutas específicas en producción
+                        .allowedOrigins("https://mi-sitio.com")  // Solo permite el origen de producción
+                        .allowedMethods("GET", "POST")  // Solo permite los métodos necesarios
+                        .allowedHeaders("Authorization", "Content-Type");  // Limitar las cabeceras permitidas
             }
         };
     }

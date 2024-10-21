@@ -1,6 +1,5 @@
 package com.classqr.sistema.commons.dto;
 
-import com.classqr.sistema.commons.entity.EstudianteEntity;
 import com.classqr.sistema.commons.util.constant.Constantes;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,32 +9,31 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Data
-public class EstudianteSeguridadDTO extends EstudianteDTO implements UserDetails {
+public class ProfesorSeguridadDTO extends ProfesorDTO implements UserDetails {
 
-    private String password;
-
-    public EstudianteSeguridadDTO(EstudianteDTO estudianteDTO) {
-        super(estudianteDTO.getCodigoEstudiante(),
-                estudianteDTO.getNombresEstudiante(),
-                estudianteDTO.getApellidosEstudiante(),
-                estudianteDTO.getNumeroDocumento(),
-                estudianteDTO.getIdTipoDocumentoEntityFk());
+    public ProfesorSeguridadDTO(ProfesorDTO profesorDTO) {
+        super(profesorDTO.getCodigoProfesor(),
+                profesorDTO.getNombresProfesor(),
+                profesorDTO.getApellidosProfesor(),
+                profesorDTO.getNumeroDocumento(),
+                profesorDTO.getCorreoProfesor(),
+                profesorDTO.getPasswordProfesor(),
+                profesorDTO.getIdTipoDocumentoEntityFk());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(Constantes.ROL_ESTUDIANTE));
+        return List.of(new SimpleGrantedAuthority(Constantes.ROL_PROFESOR));
     }
 
     @Override
     public String getPassword() {
-        return super.getNumeroDocumento();
+        return super.getPasswordProfesor();
     }
 
     @Override
     public String getUsername() {
-        return super.getCodigoEstudiante();
+        return super.getNumeroDocumento();
     }
 
     @Override

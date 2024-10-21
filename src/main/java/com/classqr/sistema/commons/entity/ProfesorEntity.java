@@ -22,6 +22,12 @@ public class ProfesorEntity {
     @Column(name = "numero_documento", nullable = false, length = 50)
     private String numeroDocumento;
 
+    @Column(name = "correo_profesor", nullable = false, length = 50)
+    private String correoProfesor;
+
+    @Column(name = "password_profesor", nullable = false, length = 400)
+    private String passwordProfesor;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_tipo_documento_fk", nullable = false)
     private TipoDocumentoEntity idTipoDocumentoEntityFk;
