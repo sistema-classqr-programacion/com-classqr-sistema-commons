@@ -1,11 +1,15 @@
 package com.classqr.sistema.commons.configuration;
 
+import com.classqr.sistema.commons.dto.AsistenciaSeguridadDTO;
 import com.classqr.sistema.commons.dto.EstudianteSeguridadDTO;
 import com.classqr.sistema.commons.dto.ProfesorSeguridadDTO;
+import com.classqr.sistema.commons.entity.AsistenciaEntity;
 import com.classqr.sistema.commons.entity.EstudianteEntity;
 import com.classqr.sistema.commons.entity.ProfesorEntity;
+import com.classqr.sistema.commons.repository.AsistenciaRepository;
 import com.classqr.sistema.commons.repository.EstudianteRepository;
 import com.classqr.sistema.commons.repository.ProfesorRepository;
+import com.classqr.sistema.commons.util.mapper.AsistenciaMapper;
 import com.classqr.sistema.commons.util.mapper.EstudianteMapper;
 import com.classqr.sistema.commons.util.mapper.ProfesorMapper;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +38,10 @@ public class ApplicationConfig {
     private final ProfesorMapper profesorMapper;
 
     private final ProfesorRepository profesorRepository;
+
+    private final AsistenciaRepository asistenciaRepository;
+
+    private final AsistenciaMapper asistenciaMapper;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -64,9 +72,15 @@ public class ApplicationConfig {
                 return new EstudianteSeguridadDTO(estudianteMapper.entityToDto(estudiante));
             }
 
-            ProfesorEntity profesor = profesorRepository.findByNumeroDocumento(username).orElseThrow(
-                    () -> new UsernameNotFoundException("Profesor no encontrado"));
-            return new ProfesorSeguridadDTO(profesorMapper.entityToDto(profesor));
+            ProfesorEntity profesor = profesorRepository.findByNumeroDocumento(username).orElse(null);
+            if(profesor != null) {
+                return new ProfesorSeguridadDTO(profesorMapper.entityToDto(profesor));
+            }
+
+            AsistenciaEntity asistencia = asistenciaRepository.findByCodigoAsistencia(username).orElseThrow(
+                    () -> new UsernameNotFoundException("Error en buscar los username")
+            );
+            return new AsistenciaSeguridadDTO(asistenciaMapper.entityToDto(asistencia));
         };
     }
 
