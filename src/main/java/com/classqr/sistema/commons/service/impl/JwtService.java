@@ -99,11 +99,12 @@ public class JwtService implements IJwtService {
 
     private String buildToken(Map<String, Object> extraClaims, UserDetails user) {
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)); // Cambia esto por el algoritmo adecuado si es necesario
+        long expirationTimeInMillis = 24 * 60 * 60 * 1000;
         return Jwts.builder()
-                .setClaims(extraClaims)
-                .setSubject(user.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24)) // 24 horas de validez
+                .claims(extraClaims)
+                .subject(user.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expirationTimeInMillis))
                 .signWith(key)
                 .compact();
     }
