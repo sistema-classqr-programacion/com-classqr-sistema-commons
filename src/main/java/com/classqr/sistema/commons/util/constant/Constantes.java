@@ -6,4 +6,6 @@ public class Constantes {
 
     public static final String ROL_ESTUDIANTE = "ESTUDIANTE";
 
+    public static final String  ROL_QR = "QR";
+
 }

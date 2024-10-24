@@ -35,9 +35,8 @@ public class JwtService implements IJwtService {
         if (userDetails instanceof EstudianteSeguridadDTO estudianteSeguridadDTO) {
             additionalClaims.put("codigoEstudiante", estudianteSeguridadDTO.getCodigoEstudiante());
             additionalClaims.put("nombreCompleto", estudianteSeguridadDTO.getNombresEstudiante() + ' ' + estudianteSeguridadDTO.getApellidosEstudiante());
-        } else if (userDetails instanceof AsistenciaSeguridadDTO asistenciaSeguridadDTO) {
-            additionalClaims.put("codigoAsistencia", asistenciaSeguridadDTO.getCodigoAsistencia());
-            additionalClaims.put("fechaAsistencia", asistenciaSeguridadDTO.getFechaAsistencia());
+        } else if (userDetails instanceof QrSeguridadDTO qrSeguridadDTO) {
+            additionalClaims.put("codigoQr", qrSeguridadDTO.getCodigoQr());
         } else if (userDetails instanceof ProfesorSeguridadDTO profesorSeguridadDTO){
             additionalClaims.put("codigoProfesor", profesorSeguridadDTO.getCodigoProfesor());
             additionalClaims.put("nombreCompleto", profesorSeguridadDTO.getNombresProfesor());

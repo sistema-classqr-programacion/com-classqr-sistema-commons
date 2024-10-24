@@ -28,6 +28,10 @@ public class AsistenciaEntity {
     @JoinColumn(name = "codigo_curso_fk")
     private CursoEntity codigoCursoFk;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "codigo_qr_fk")
+    private QrEntity codigoQrFk;
+
     @Column(name = "ip_estudiante")
     private InetAddress ipEstudiante;
 

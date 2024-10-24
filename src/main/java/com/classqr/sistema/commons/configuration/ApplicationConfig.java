@@ -1,17 +1,19 @@
 package com.classqr.sistema.commons.configuration;
 
-import com.classqr.sistema.commons.dto.AsistenciaSeguridadDTO;
 import com.classqr.sistema.commons.dto.EstudianteSeguridadDTO;
 import com.classqr.sistema.commons.dto.ProfesorSeguridadDTO;
+import com.classqr.sistema.commons.dto.QrSeguridadDTO;
 import com.classqr.sistema.commons.entity.AsistenciaEntity;
 import com.classqr.sistema.commons.entity.EstudianteEntity;
 import com.classqr.sistema.commons.entity.ProfesorEntity;
-import com.classqr.sistema.commons.repository.AsistenciaRepository;
+import com.classqr.sistema.commons.entity.QrEntity;
 import com.classqr.sistema.commons.repository.EstudianteRepository;
 import com.classqr.sistema.commons.repository.ProfesorRepository;
+import com.classqr.sistema.commons.repository.QrRepository;
 import com.classqr.sistema.commons.util.mapper.AsistenciaMapper;
 import com.classqr.sistema.commons.util.mapper.EstudianteMapper;
 import com.classqr.sistema.commons.util.mapper.ProfesorMapper;
+import com.classqr.sistema.commons.util.mapper.QrMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,9 +41,9 @@ public class ApplicationConfig {
 
     private final ProfesorRepository profesorRepository;
 
-    private final AsistenciaRepository asistenciaRepository;
+    private final QrRepository qrRepository;
 
-    private final AsistenciaMapper asistenciaMapper;
+    private final QrMapper qrMapper;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -77,10 +79,10 @@ public class ApplicationConfig {
                 return new ProfesorSeguridadDTO(profesorMapper.entityToDto(profesor));
             }
 
-            AsistenciaEntity asistencia = asistenciaRepository.findByCodigoAsistencia(username).orElseThrow(
+            QrEntity qr = qrRepository.findByCodigoQr(username).orElseThrow(
                     () -> new UsernameNotFoundException("Error en buscar los username")
             );
-            return new AsistenciaSeguridadDTO(asistenciaMapper.entityToDto(asistencia));
+            return new QrSeguridadDTO(qrMapper.entityToDto(qr));
         };
     }
 
