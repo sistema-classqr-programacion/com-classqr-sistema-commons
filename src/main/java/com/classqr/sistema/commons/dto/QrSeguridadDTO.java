@@ -12,7 +12,8 @@ public class QrSeguridadDTO extends QrDTO implements UserDetails {
 
     public QrSeguridadDTO(QrDTO qrDTO) {
         super(qrDTO.getCodigoQr(),
-                qrDTO.getFechaCreacionQr());
+                qrDTO.getFechaCreacionQr(),
+                qrDTO.getFechaFinQr());
     }
 
     @Override

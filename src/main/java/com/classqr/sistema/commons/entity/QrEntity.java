@@ -22,4 +22,7 @@ public class QrEntity {
     @Column(name = "fecha_creacion_qr", nullable = false)
     private LocalDateTime fechaCreacionQr;
 
+    @Column(name = "fecha_fin_qr", nullable = false)
+    private LocalDateTime fechaFinQr;
+
 }

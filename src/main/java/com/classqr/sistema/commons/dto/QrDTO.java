@@ -12,5 +12,5 @@ public class QrDTO {
     private String codigoQr;
 
     private LocalDateTime fechaCreacionQr;
-
+    private LocalDateTime fechaFinQr;
 }
