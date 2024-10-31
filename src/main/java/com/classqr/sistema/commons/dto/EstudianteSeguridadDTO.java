@@ -20,7 +20,8 @@ public class EstudianteSeguridadDTO extends EstudianteDTO implements UserDetails
                 estudianteDTO.getNombresEstudiante(),
                 estudianteDTO.getApellidosEstudiante(),
                 estudianteDTO.getNumeroDocumento(),
-                estudianteDTO.getIdTipoDocumentoEntityFk());
+                estudianteDTO.getIdTipoDocumentoEntityFk(),
+                estudianteDTO.getAsistio());
     }
 
     @Override
