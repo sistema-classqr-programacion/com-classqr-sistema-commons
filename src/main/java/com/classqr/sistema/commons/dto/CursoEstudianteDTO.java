@@ -10,9 +10,9 @@ public class CursoEstudianteDTO {
 
     private CursoEstudianteIdDTO id;
 
-    private CursoEntity codigoCursoEntityFk;
+    private CursoDTO codigoCursoEntityFk;
 
-    private EstudianteEntity codigoEstudianteEntityFk;
+    private EstudianteDTO codigoEstudianteEntityFk;
 
 
 }
