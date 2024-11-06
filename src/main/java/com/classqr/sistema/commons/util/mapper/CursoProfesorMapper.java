@@ -1,7 +1,9 @@
 package com.classqr.sistema.commons.util.mapper;
 
 import com.classqr.sistema.commons.dto.CursoDTO;
+import com.classqr.sistema.commons.dto.CursoProfesorDTO;
 import com.classqr.sistema.commons.entity.CursoEntity;
+import com.classqr.sistema.commons.entity.CursoProfesorEntity;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -9,13 +11,13 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CursoProfesorMapper {
 
-    CursoDTO entityToDto(CursoEntity entity);
+    CursoProfesorDTO entityToDto(CursoProfesorEntity entity);
 
-    CursoEntity dtoToEntity(CursoDTO dto);
+    CursoProfesorEntity dtoToEntity(CursoProfesorDTO dto);
 
-    List<CursoDTO> listEntityTolistDto(List<CursoEntity> entity);
+    List<CursoProfesorDTO> listEntityTolistDto(List<CursoProfesorEntity> entity);
 
-    List<CursoEntity> listDtoToListEntity(List<CursoDTO> dto);
+    List<CursoProfesorEntity> listDtoToListEntity(List<CursoProfesorDTO> dto);
 
 
 }
