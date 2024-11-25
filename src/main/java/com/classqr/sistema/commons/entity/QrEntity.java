@@ -1,9 +1,6 @@
 package com.classqr.sistema.commons.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,5 +21,18 @@ public class QrEntity {
 
     @Column(name = "fecha_fin_qr", nullable = false)
     private LocalDateTime fechaFinQr;
+
+    @Column(name = "imagen_qr", nullable = false)
+    private byte[] imagenQr;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "codigo_curso", nullable = false)
+    private CursoEntity cursoFk;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "codigo_profesor_fk", nullable = false)
+    private ProfesorEntity codigoProfesorFk;
+
+
 
 }

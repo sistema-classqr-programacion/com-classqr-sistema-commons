@@ -14,5 +14,4 @@ public class CursoEstudianteDTO {
 
     private EstudianteDTO codigoEstudianteEntityFk;
 
-
 }

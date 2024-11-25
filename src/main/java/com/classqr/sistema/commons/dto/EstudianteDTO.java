@@ -19,5 +19,4 @@ public class EstudianteDTO {
     private TipoDocumentoDTO idTipoDocumentoEntityFk;
 
     private Boolean asistio;
-
 }
