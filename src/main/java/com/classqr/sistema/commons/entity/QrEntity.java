@@ -26,7 +26,7 @@ public class QrEntity {
     private byte[] imagenQr;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "codigo_curso", nullable = false)
+    @JoinColumn(name = "codigo_curso_fk", nullable = false)
     private CursoEntity cursoFk;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
