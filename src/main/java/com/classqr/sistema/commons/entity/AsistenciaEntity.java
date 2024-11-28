@@ -12,7 +12,11 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "asistencia", schema = "classqr")
 public class AsistenciaEntity {
+
     @Id
+    @Column(name = "id_asistencia")
+    private Long idAsistencia;
+
     @Column(name = "codigo_asistencia", nullable = false)
     private String codigoAsistencia;
 

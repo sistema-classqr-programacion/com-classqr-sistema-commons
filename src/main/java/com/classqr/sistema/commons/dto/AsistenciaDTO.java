@@ -18,6 +18,8 @@ import java.time.LocalDate;
 @Builder
 public class AsistenciaDTO {
 
+    private Long idAsistencia;
+
     private String codigoAsistencia;
 
     private EstudianteDTO codigoEstudianteFk;
