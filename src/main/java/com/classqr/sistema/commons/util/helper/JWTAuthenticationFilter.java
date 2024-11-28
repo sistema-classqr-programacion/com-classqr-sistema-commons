@@ -1,6 +1,5 @@
 package com.classqr.sistema.commons.util.helper;
 
-import com.classqr.sistema.commons.service.ITokenBlackListService;
 import com.classqr.sistema.commons.service.impl.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,20 +26,12 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailsService;
 
-    private final ITokenBlackListService iTokenBlackListService;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, ServletException {
         final String token = getTokenFromRequest(request);
         String username = "";
         if (token == null) {
             filterChain.doFilter(request, response);
-            return;
-        }
-
-        if (iTokenBlackListService.isTokenBlackListed(token)) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Token está en la lista negra");
             return;
         }
 

@@ -30,19 +30,21 @@ public class JwtService implements IJwtService {
     @Override
     public String getToken(UserDetails userDetails) {
         Map<String, Object> additionalClaims = new HashMap<>();
+        long expirationTimeInMillis = 24 * 60 * 60 * 1000; // Valor por defecto: 24 horas
 
-        // Asume que el UserDetails es del tipo EstudianteSeguridadDTO o AsistenciaSeguridadDTO
+        // Asume que el UserDetails es del tipo EstudianteSeguridadDTO, QrSeguridadDTO, o ProfesorSeguridadDTO
         if (userDetails instanceof EstudianteSeguridadDTO estudianteSeguridadDTO) {
             additionalClaims.put("codigoEstudiante", estudianteSeguridadDTO.getCodigoEstudiante());
             additionalClaims.put("nombreCompleto", estudianteSeguridadDTO.getNombresEstudiante() + ' ' + estudianteSeguridadDTO.getApellidosEstudiante());
         } else if (userDetails instanceof QrSeguridadDTO qrSeguridadDTO) {
             additionalClaims.put("codigoQr", qrSeguridadDTO.getCodigoQr());
-        } else if (userDetails instanceof ProfesorSeguridadDTO profesorSeguridadDTO){
+            expirationTimeInMillis = 30 * 60 * 1000; // Si es QR, el token dura 30 minutos
+        } else if (userDetails instanceof ProfesorSeguridadDTO profesorSeguridadDTO) {
             additionalClaims.put("codigoProfesor", profesorSeguridadDTO.getCodigoProfesor());
             additionalClaims.put("nombreCompleto", profesorSeguridadDTO.getNombresProfesor());
         }
 
-        return buildToken(additionalClaims, userDetails);
+        return buildToken(additionalClaims, userDetails, expirationTimeInMillis);
     }
 
     @Override
@@ -74,36 +76,33 @@ public class JwtService implements IJwtService {
     }
 
     public String getIdentificadorFromToken(String token) {
-        // Aquí se generaliza la obtención del identificador.
-        // Puede ser codigoEstudiante, codigoAsistencia, o cualquier otro identificador según el DTO
         Claims claims = getAllClaims(token);
 
         if (claims.containsKey("codigoEstudiante")) {
             return claims.get("codigoEstudiante", String.class);
         } else if (claims.containsKey("codigoAsistencia")) {
             return claims.get("codigoAsistencia", String.class);
-        } else if (claims.containsKey("codigoProfesor")){
+        } else if (claims.containsKey("codigoProfesor")) {
             return claims.get("codigoProfesor", String.class);
         }
-        // Manejo de error en caso de que no haya un identificador válido en el token
         throw new IllegalArgumentException("Token no contiene un identificador válido.");
     }
 
-
     private Claims getAllClaims(String token) {
-        return Jwts.parser().
-                verifyWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey))).
-                build().parseClaimsJws(token).getBody();
+        return Jwts.parser()
+                .setSigningKey(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
-    private String buildToken(Map<String, Object> extraClaims, UserDetails user) {
-        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)); // Cambia esto por el algoritmo adecuado si es necesario
-        long expirationTimeInMillis = 24 * 60 * 60 * 1000;
+    private String buildToken(Map<String, Object> extraClaims, UserDetails user, long expirationTimeInMillis) {
+        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
         return Jwts.builder()
-                .claims(extraClaims)
-                .subject(user.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expirationTimeInMillis))
+                .setClaims(extraClaims)
+                .setSubject(user.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTimeInMillis))
                 .signWith(key)
                 .compact();
     }
