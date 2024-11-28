@@ -14,6 +14,8 @@ import java.time.LocalDate;
 public class AsistenciaEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "asistencia_id_asistencia_gen")
+    @SequenceGenerator(name = "asistencia_id_asistencia_gen", sequenceName = "asistencia_id_asistencia_seq", allocationSize = 1)
     @Column(name = "id_asistencia")
     private Long idAsistencia;
 
